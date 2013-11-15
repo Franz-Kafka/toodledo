@@ -22,6 +22,8 @@ $(document)
 			 	
 			 	$('.notviscont').fadeOut(300);
 			 	
+			 	
+			 	
 			 	return false; 
 		 });
 		 
@@ -29,12 +31,17 @@ $(document)
 			 
 			 $( this ).css('background', 'url(img/checker_done.png)');
 			 
+			 $( this ).nextAll('.taskname').find('span').empty();
+			 
 			 var element = $( this ).nextAll('.taskname');
 			 var inhalt = $( this ).nextAll('.taskname').text();
 			 
+			 
 			 element
 			 	.html("<s>" + inhalt + "</s>")
-			 	.css('color', 'grey')
+			 	.css('color', 'grey');
+			 	
+			 
 			 
 		 });
 		 
@@ -47,14 +54,45 @@ $(document)
 			   
 			   $('.tasks').append('<div class="task taskfour"><div class="checker"></div><div class="taskname">' + newtodow + '</div><div class="timeline" style="width: 0%"></div></div>');
 			   
+			   $('input').val('');
+			   
 			});
 			$('input').keyup(function(e){
 			    if(e.keyCode == 13)
 			    {
 			        $(this).trigger("enterKey");
-			    }
+			    }  
 			});
-    
+			
+			
+
+       // ARROW DRIVER
+      
+  
+           
+         $('.task').click(function(){
+             
+              var taskoffset = $( this ).offset().top;
+              
+              var tasknamefortitle = $( this ).find('.taskname').text();
+                             
+              $('.activearr').animate({top: taskoffset-53}, 150);
+              
+              $('.details').fadeOut(300, function(){
+	              $('.detailstopbar').empty();
+              });
+              $('.details').fadeIn(200, function(){
+	              $('.detailstopbar').text(tasknamefortitle);
+              });
+              
+              
+              
+              
+              console.log(tasknamefortitle)
+   
+         });
+   
 });
+
 
 
